@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" th:href="@{/icons/favicon.png}">
+    <title>My Notes</title>
+</head>
+<body>
+    <form id="loginForm" th:action=@{/login} method="post">
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="userID" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit" id="loginButton">Login</button>
+    </form>
+    <br>
+    <a th:href="@{/signup}">Sign Up</a>
+    <script th:src="@{/js/login.js}" type="text/javascript"></script>
+</body>
+</html>

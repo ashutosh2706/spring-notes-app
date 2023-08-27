@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <link rel="icon" type="image/png" th:href="@{/icons/favicon_404.png}">
+    <link rel="stylesheet" th:href="@{/css/error.css}"/>
+</head>
+<body>
+    <div class="container">        
+        <img th:src="@{/icons/404.png}" alt="404">
+        <h1>404</h1>
+        <p>Oops! Page not found</p>
+        <a th:href="@{/}">Back to Home</a>
+      </div>
+</body>
+</html>
