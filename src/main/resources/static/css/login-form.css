@@ -1,0 +1,52 @@
+body {
+	background-color: #f8f9fa;
+	font-family: Arial, sans-serif;
+}
+
+.login-container {
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+	font-weight: bold;
+}
+
+.form-control {
+	margin-bottom: 15px;
+}
+
+#loginButton {
+	background-color: #007bff;
+	color: #fff;
+	margin-top: 3px;
+	width: 100px;
+	padding: 10px 20px;
+	border-radius: 20px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+
+#loginButton:hover {
+	background-color: #0056b3;
+}
+
+#signupLink {
+	display: block;
+	text-align: center;
+	font-size: 18px;
+	margin-top: 15px;
+	font-weight: bold;
+	color: #007bff;
+	transition: 0.4s;
+	text-decoration: none;
+}
+
+#signupLink:hover {
+	color: #0000a0;
+}

@@ -11,16 +11,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.mynotes.model.Note;
 import com.spring.mynotes.model.User;
+import com.spring.mynotes.service.FileService;
 import com.spring.mynotes.service.NoteService;
 import com.spring.mynotes.service.UserService;
 import com.spring.mynotes.util.CookieManager;
@@ -38,9 +44,12 @@ public class AppController {
 	
 	@Autowired
 	private NoteService noteService;
+	
+	@Autowired
+	private FileService fileService;
 
-	private static final String COOKIE_NAME = "loggedInUser";
-	private static final String UPLOAD_DIR = "Uploads";
+	public static final String COOKIE_NAME = "loggedInUser";
+	public static final String UPLOAD_DIR = "Uploads";
 	
 	@GetMapping("/")
 	public String welcomePage(HttpServletRequest request) {
@@ -125,6 +134,35 @@ public class AppController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		return "redirect:/home";
+	}
+	
+	
+	@GetMapping("/download/{fileName:.+}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+		Resource resource = this.fileService.loadFileAsResource(fileName);
+		
+		return ResponseEntity.ok()
+	            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	            .body(resource);
+	}
+	
+	
+	@GetMapping("/delete/{fileName:.+}")
+	public String deleteFile(@PathVariable String fileName) {
+		
+		String filePath = UPLOAD_DIR + "/" + fileName;
+		try {
+			Path path = Paths.get(filePath);
+			Files.delete(path);
+			this.noteService.deleteNote(fileName);
+			/* LOG MESSAGE */
+			System.out.println("File Deleted");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/home";
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.mynotes.dao.NoteDao;
 import com.spring.mynotes.model.Note;
@@ -24,5 +25,10 @@ public class NoteService {
 	
 	public List<Note> getNotesByAuthor(String author) {
 		return noteDao.getNoteByAuthor(author);
+	}
+	
+	@Transactional
+	public void deleteNote(String fileName) {
+		noteDao.deleteAllByFileName(fileName);
 	}
 }

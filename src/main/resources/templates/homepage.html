@@ -16,7 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="max-width: 85vw;">
 		<h1>
 			Welcome, <span id="text">NULL</span>
 		</h1>
@@ -44,7 +44,7 @@
 						<td th:text="${note.getSubject()}"></td>
 						<td th:text="${note.getAuthor()}"></td>
 						<td th:text="${note.getUploadDate()}"></td>
-						<td><a href="#download">Download</a></td>
+						<td><a th:href="@{/download/{fileName}(fileName=${note.fileName})}">Download</a></td>
 					</tr>
 
 				</table>
@@ -65,7 +65,7 @@
 						<td th:text="${note.getSubject()}"></td>
 						<td th:text="${note.getAuthor()}"></td>
 						<td th:text="${note.getUploadDate()}"></td>
-						<td><a href="#delete">Delete</a></td>
+						<td><a th:href="@{/delete/{fileName}(fileName=${note.fileName})}">Delete</a></td>
 					</tr>
 
 

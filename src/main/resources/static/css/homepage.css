@@ -1,6 +1,13 @@
 .container {
-	position: absolute;
-	margin-left: 20px;
+	max-height: 100vh;
+	overflow: auto;
+	scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+	width: 0;
+    background-color: transparent;
 }
 
 .container h1 {
@@ -23,6 +30,7 @@
 	background-color: #4CAF50;
 	color: white;
 	margin-top: 30px;
+	margin-right: 150px;
 	padding: 10px 20px;
 	border: 1px solid black;
 	border-radius: 5px;
