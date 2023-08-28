@@ -17,10 +17,8 @@ public class CookieManager {
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookieName.equals(cookie.getName())) {
-                    cookieVal = cookie.getValue();
-                    break;
-                }
+                if (cookieName.equals(cookie.getName())) 
+                	return cookie.getValue();
             }
         }
 		return cookieVal;

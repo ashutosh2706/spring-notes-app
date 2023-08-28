@@ -1,18 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" th:href="@{/icons/favicon.png}">
-    <link rel="stylesheet" th:href="@{/css/homepage.css}"/>
-    <title>My Notes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Notes</title>
+<link rel="icon" type="image/png" th:href="@{/icons/favicon.png}">
+<link rel="stylesheet" th:href="@{/css/homepage.css}" />
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<h1> Welcome : </h1>
-		<div id="text">NULL</div>
+		<h1>
+			Welcome, <span id="text">NULL</span>
+		</h1>
+
+		<h2>Notes List</h2>
+		<ul class="nav nav-tabs">
+			<li class="nav-item"><a class="nav-link active"
+				data-toggle="tab" href="#allNotes">All Notes</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#myNotes">My Notes</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="allNotes" class="tab-pane fade show active">
+				<table>
+					<tr>
+						<th>File Name</th>
+						<th>Subject</th>
+						<th>Uploaded By</th>
+						<th>Upload Date</th>
+						<th>Action</th>
+					</tr>
+
+					<tr th:each="note : ${allNotes}">
+						<td th:text="${note.getFileName()}"></td>
+						<td th:text="${note.getSubject()}"></td>
+						<td th:text="${note.getAuthor()}"></td>
+						<td th:text="${note.getUploadDate()}"></td>
+						<td><a href="#download">Download</a></td>
+					</tr>
+
+				</table>
+			</div>
+			<div id="myNotes" class="tab-pane fade">
+				<table>
+
+					<tr>
+						<th>File Name</th>
+						<th>Subject</th>
+						<th>Uploaded By</th>
+						<th>Upload Date</th>
+						<th>Action</th>
+					</tr>
+
+					<tr th:each="note : ${myNotes}">
+						<td th:text="${note.getFileName()}"></td>
+						<td th:text="${note.getSubject()}"></td>
+						<td th:text="${note.getAuthor()}"></td>
+						<td th:text="${note.getUploadDate()}"></td>
+						<td><a href="#delete">Delete</a></td>
+					</tr>
+
+
+				</table>
+			</div>
+		</div>
+		<form action="/upload" method="POST" enctype="multipart/form-data">
+			<div style="margin-top: 30px;">
+				<label for="subject_field">Subject: </label>
+				<input style="margin-right: 15px;" type="text" id="subject_field" name="subject" required>
+				<input type="file" name="file" required/>
+			</div>
+			
+			<button type="submit" id="upload_btn" class="upload_btn">UPLOAD NOTE</button>
+		</form>
 		<button id="logout_btn" class="logout_btn">LOGOUT</button>
 	</div>
-    <script th:src="@{/js/homepage.js}" type="text/javascript"></script>
+	<script th:src="@{/js/homepage.js}" type="text/javascript"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ import com.spring.mynotes.model.User;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Long>{
-	// declare custom methods
+	// custom methods
 	public User getUserByUserID(String userID);
 
 }
